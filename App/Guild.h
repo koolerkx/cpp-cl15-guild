@@ -12,10 +12,10 @@ class Guild {
   Guild() = default;
   // Guild(const std::string& filename)
   ~Guild();
-  void Joining(Character* adventurer);
-  void Withdrawal(int index);
-  void DisplayList();
-  void DisplayDetailed(int index);
+  void AddMember(Character* adventurer);
+  void RemoveMember(int index);
+  void DisplayList() const;
+  void DisplayDetailed(int index) const;
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 class Job {
  private:
-  const std::string m_names[4]{"Barbarian", "Fighter", "Paladin", "Ranger"};
+  const std::string m_names[4]{"ƒiƒCƒg", "”’–‚–@m", "—³‹Rm", "‹á—Vl"};
 
   int m_id{0};
 

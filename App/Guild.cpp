@@ -8,7 +8,7 @@ Guild::~Guild() {
   }
 }
 
-void Guild::Joining(Character* adventurer) {
+void Guild::AddMember(Character* adventurer) {
   for (int i = 0; i < MAX_ADVENTURERS; i++) {
     if (!m_adventurers[i]) {
       m_adventurers[i] = adventurer;
@@ -17,34 +17,34 @@ void Guild::Joining(Character* adventurer) {
   }
 }
 
-void Guild::Withdrawal(int index) {
+void Guild::RemoveMember(int index) {
   delete m_adventurers[index];
   m_adventurers[index] = nullptr;
 }
 
-void Guild::DisplayList() {
+void Guild::DisplayList() const {
   for (int i = 0; i < MAX_ADVENTURERS; i++) {
     if (!m_adventurers[i]) continue;
 
     std::cout << i << ":" << m_adventurers[i]->GetName();
     std::cout << "(" << m_adventurers[i]->GetLv() << ")";
-    std::cout << m_adventurers[i]->GetJob().GetName() << std::endl;
+    std::cout << m_adventurers[i]->GetJob().GetName() << "\n";
   }
 }
 
-void Guild::DisplayDetailed(int index) {
+void Guild::DisplayDetailed(int index) const {
   if (!m_adventurers[index]) {
-    std::cout << "112211";
+    std::cout << "No this adventurer\n";
     return;
   }
 
   Character* p = m_adventurers[index];
 
-  std::cout << "NAME" << p->GetName() << std::endl;
-  std::cout << "JOB" << p->GetJob().GetName() << std::endl;
+  std::cout << "NAME" << p->GetName() << "\n";
+  std::cout << "JOB" << p->GetJob().GetName() << "\n";
   std::cout << "AGE" << p->GetAge() << "SAI\n";
-  std::cout << "LV: " << p->GetLv() << std::endl;
-  std::cout << "HP: " << p->GetHp() << std::endl;
-  std::cout << "MP: " << p->GetMp() << std::endl;
-  std::cout << "----------------------\n";
+  std::cout << "LV: " << p->GetLv() << "\n";
+  std::cout << "HP: " << p->GetHp() << "\n";
+  std::cout << "MP: " << p->GetMp() << "\n";
+  std::cout << "----------------------" << "\n";
 }

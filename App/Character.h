@@ -7,67 +7,63 @@
 
 class Character {
  private:
-  std::string m_name{"Name"};
-  Job m_job;
-  int m_age{0};
-  int m_lv{1};
-  int m_hp{0};
-  int m_mp{0};
-  // int m_atk{ 0 };
-  // int m_def{ 0 };
+  std::string name_{"名前なし"};
+  Job job_;
+  int age_{0};
+  int lv_{1};
+  int hp_{0};
+  int mp_{0};
 
  public:
-  Character() : Character{"Name", "Fighter", 16, 1, 1} {
+  Character() : Character{"名前なし", "ナイト", 16, 1, 1} {
   }
   Character(const std::string& name, int job_id, int age, int hp, int mp)
-      : m_name{name}, m_job{job_id}, m_age{age}, m_lv{1}, m_hp{hp}, m_mp{mp} {
+      : name_{name}, job_{job_id}, age_{age}, lv_{1}, hp_{hp}, mp_{mp} {
   }
   Character(const std::string& name, const std::string& job_name, int age,
             int hp, int mp)
-      : m_name{name}, m_job{job_name}, m_age{age}, m_lv{1}, m_hp{hp}, m_mp{mp} {
+      : name_{name}, job_{job_name}, age_{age}, lv_{1}, hp_{hp}, mp_{mp} {
   }
-  // Character(const std::string& name, int job_id, int age, int hp, int mp, int
-  // atk, int def); Character(const std::string& name, const std::string&
-  // job_name, int age, int hp, int mp, int atk, int def);
   ~Character() = default;
 
   void SetName(const std::string& name) {
-    m_name = name;
+    name_ = name;
   }
   const std::string& GetName() {
-    return m_name;
+    return name_;
   }
+
   Job GetJob() {
-    return m_job;
+    return job_;
   }
+
   void LvUp() {
-    ++m_lv;
+    ++lv_;
   }
-  int GetLv() {
-    return m_lv;
+  int GetLv() const {
+    return lv_;
   }
+
   void SetAge(int age) {
-    m_age = age;
+    age_ = age;
   }
-  int GetAge() {
-    return m_age;
+  int GetAge() const {
+    return age_;
   }
+
   void SetHp(int hp) {
-    m_hp = hp;
+    hp_ = hp;
   }
-  int GetHp() {
-    return m_hp;
+  int GetHp() const {
+    return hp_;
   }
+
   void SetMp(int mp) {
-    m_mp = mp;
+    mp_ = mp;
   }
-  int GetMp() {
-    return m_mp;
+  int GetMp() const {
+    return mp_;
   }
-  // void SetAtk(int atk);
-  // int  GetAtk();
-  // void SetDef(int def);
-  // int  GetDef();
 };
 
 #endif  // CHARACTER_H

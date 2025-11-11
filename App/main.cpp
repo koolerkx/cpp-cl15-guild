@@ -21,7 +21,7 @@ int main() {
   std::string name, job_name;
 
   for (;;) {
-    std::cout << std::endl;
+    std::cout << "\n";
     std::cout << "menu\n";
     std::cout << "1:“ü‰ïŽè‘±‚«\n";
     std::cout << "2:‘Þ‰ïŽè‘±‚«\n";
@@ -46,19 +46,19 @@ int main() {
         std::cin >> hp;
         std::cout << "“ü‰ï‚ÌMP‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B\n>";
         std::cin >> mp;
-        std::cout << std::endl;
-        std::cout << std::endl;
-        std::cout << std::endl;
-        std::cout << "–¼‘O" << name << std::endl;
-        std::cout << "E‹Æ" << job.GetName() << std::endl;
+        std::cout << "\n";
+        std::cout << "\n";
+        std::cout << "\n";
+        std::cout << "–¼‘O" << name << "\n";
+        std::cout << "E‹Æ" << job.GetName() << "\n";
         std::cout << "”N—î" << age << "Î\n";
-        std::cout << "HP: " << hp << std::endl;
-        std::cout << "MP: " << mp << std::endl;
+        std::cout << "HP: " << hp << "\n";
+        std::cout << "MP: " << mp << "\n";
         std::cout << "----------------------\n";
         std::cout << "‚±‚Ì–`Œ¯ŽÒ‚ð“o˜^’v‚µ‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚ªH y/n\n>";
         std::cin >> yes_no;
         if (yes_no == 'y') {
-          guild.Joining(new Character{name, job_name, age, hp, mp});
+          guild.AddMember(new Character{name, job_name, age, hp, mp});
         } else {
           std::cout << "“o˜^‚ðƒLƒƒƒ“ƒZƒ‹‚µ‚Ü‚µ‚½B\n";
         }
@@ -67,14 +67,14 @@ int main() {
       case 2:
         std::cout << "ƒŠƒXƒg‚Ì‰½”Ô–Ú‚Ì–`Œ¯ŽÒ‚ð‘Þ‰ï’v‚µ‚Ü‚·‚©H\n>";
         std::cin >> n;
-        std::cout << std::endl;
-        std::cout << std::endl;
-        std::cout << std::endl;
+        std::cout << "\n";
+        std::cout << "\n";
+        std::cout << "\n";
         guild.DisplayDetailed(n);
         std::cout << "‚±‚Ì–`Œ¯ŽÒ‚à‘Þ‰ï‚³‚¹‚Ü‚·‚©H y/n\n>";
         std::cin >> yes_no;
         if (yes_no == 'y') {
-          guild.Withdrawal(n);
+          guild.RemoveMember(n);
         }
         break;
       case 3:
