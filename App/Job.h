@@ -1,3 +1,8 @@
+/**
+ * @file Job.h
+ * @brief E‹Æ‚ğ•\‚·ƒNƒ‰ƒX
+ */
+
 #ifndef JOB_H
 #define JOB_H
 

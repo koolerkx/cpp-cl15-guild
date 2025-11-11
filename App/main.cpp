@@ -5,88 +5,15 @@
 
 #include <iostream>
 
+#include "App.h"
 #include "Character.h"
 #include "Guild.h"
 #include "Job.h"
 
 int main() {
-  std::cout << "==================\n";
-  std::cout << "welcome\n";
-  std::cout << "==================\n";
+  App* app = new App();
 
-  Guild guild;
-
-  int n, age, hp, mp;
-  char yes_no;
-  std::string name, job_name;
-
-  for (;;) {
-    std::cout << "\n";
-    std::cout << "menu\n";
-    std::cout << "1:“ü‰ïŽè‘±‚«\n";
-    std::cout << "2:‘Þ‰ïŽè‘±‚«\n";
-    std::cout << "3:‰ïˆõˆê——\n";
-    std::cout << "4:‰ïˆõÚ×\n";
-    std::cout << "0:I—¹\n";
-    std::cout << ">";
-
-    std::cin >> n;
-    switch (n) {
-      case 0:
-        return 0;
-      case 1: {
-        std::cout << "“ü‰ï‚Ì–¼‘O‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B\n>";
-        std::cin >> name;
-        std::cout << "“ü‰ï‚ÌE‹Æ‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B\n>";
-        std::cin >> job_name;
-        Job job{job_name};
-        std::cout << "“ü‰ï‚Ì”N—î‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B\n>";
-        std::cin >> age;
-        std::cout << "“ü‰ï‚ÌHP‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B\n>";
-        std::cin >> hp;
-        std::cout << "“ü‰ï‚ÌMP‚ð“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B\n>";
-        std::cin >> mp;
-        std::cout << "\n";
-        std::cout << "\n";
-        std::cout << "\n";
-        std::cout << "–¼‘O" << name << "\n";
-        std::cout << "E‹Æ" << job.GetName() << "\n";
-        std::cout << "”N—î" << age << "Î\n";
-        std::cout << "HP: " << hp << "\n";
-        std::cout << "MP: " << mp << "\n";
-        std::cout << "----------------------\n";
-        std::cout << "‚±‚Ì–`Œ¯ŽÒ‚ð“o˜^’v‚µ‚Ü‚·B‚æ‚ë‚µ‚¢‚Å‚·‚ªH y/n\n>";
-        std::cin >> yes_no;
-        if (yes_no == 'y') {
-          guild.AddMember(new Character{name, job_name, age, hp, mp});
-        } else {
-          std::cout << "“o˜^‚ðƒLƒƒƒ“ƒZƒ‹‚µ‚Ü‚µ‚½B\n";
-        }
-        break;
-      }
-      case 2:
-        std::cout << "ƒŠƒXƒg‚Ì‰½”Ô–Ú‚Ì–`Œ¯ŽÒ‚ð‘Þ‰ï’v‚µ‚Ü‚·‚©H\n>";
-        std::cin >> n;
-        std::cout << "\n";
-        std::cout << "\n";
-        std::cout << "\n";
-        guild.DisplayDetailed(n);
-        std::cout << "‚±‚Ì–`Œ¯ŽÒ‚à‘Þ‰ï‚³‚¹‚Ü‚·‚©H y/n\n>";
-        std::cin >> yes_no;
-        if (yes_no == 'y') {
-          guild.RemoveMember(n);
-        }
-        break;
-      case 3:
-        guild.DisplayList();
-        break;
-      case 4:
-        std::cout << "–¼•ë‚ðŒŸõ‚µ‚Ü‚·‚©H\n>";
-        std::cin >> n;
-        guild.DisplayDetailed(n);
-        break;
-    }
-
-    std::cin.get();
-  }
+  app->Run();
+  
+  delete app;
 }

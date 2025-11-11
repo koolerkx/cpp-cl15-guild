@@ -1,3 +1,8 @@
+/**
+ * @file Character.h
+ * @brief キャラクターを制御
+ */
+
 #ifndef CHARACTER_H
 #define CHARACTER_H
 

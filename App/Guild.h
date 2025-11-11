@@ -1,3 +1,8 @@
+/**
+ * @file Guild.h
+ * @brief ƒMƒ‹ƒh‚ÌŠÇ—
+ */
+
 #ifndef GUILD_H
 #define GUILD_H
 

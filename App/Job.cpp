@@ -1,3 +1,8 @@
+/**
+ * @file Job.cpp
+ * @brief E‹Æ‚ğ•\‚·ƒNƒ‰ƒX
+ */
+
 #include "job.h"
 
 Job::Job(const std::string& name) : m_id(0) {

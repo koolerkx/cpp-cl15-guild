@@ -1,3 +1,8 @@
+/**
+ * @file Guild.cpp
+ * @brief ƒMƒ‹ƒh‚ÌŠÇ—
+ */
+
 #include "Guild.h"
 
 #include <iostream>
