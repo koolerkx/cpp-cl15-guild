@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="CommandHistory.cpp" />
     <ClCompile Include="Guild.cpp" />
     <ClCompile Include="Job.cpp" />
     <ClCompile Include="main.cpp" />
@@ -163,6 +164,8 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CommandHistory.h" />
+    <ClInclude Include="Command\ICommand.h" />
     <ClInclude Include="Guild.h" />
     <ClInclude Include="Job.h" />
     <ClInclude Include="Menu.h" />
