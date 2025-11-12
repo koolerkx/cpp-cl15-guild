@@ -17,7 +17,7 @@ class Guild {
   Guild() = default;
   // Guild(const std::string& filename)
   ~Guild();
-  void AddMember(Character* adventurer);
+  int AddMember(Character* adventurer);
   void RemoveMember(int index);
   void DisplayList() const;
   void DisplayDetailed(int index) const;

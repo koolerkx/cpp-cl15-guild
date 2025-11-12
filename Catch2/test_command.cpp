@@ -21,6 +21,10 @@ class ValueCommand : public ICommand {
     value_ = new_value_;
   }
 
+  void Redo() override {
+    this->Execute();
+  }
+
   void Undo() override {
     if (log_)
       log_->push_back("Undo: " + std::to_string(new_value_) + "->" +

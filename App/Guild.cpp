@@ -13,13 +13,16 @@ Guild::~Guild() {
   }
 }
 
-void Guild::AddMember(Character* adventurer) {
+int Guild::AddMember(Character* adventurer) {
   for (int i = 0; i < MAX_ADVENTURERS; i++) {
     if (!m_adventurers[i]) {
       m_adventurers[i] = adventurer;
-      break;
+      return i;
     }
   }
+
+  delete adventurer;
+  return -1;  // todo: implement exception
 }
 
 void Guild::RemoveMember(int index) {

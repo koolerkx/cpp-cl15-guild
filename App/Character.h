@@ -29,6 +29,14 @@ class Character {
             int hp, int mp)
       : name_{name}, job_{job_name}, age_{age}, lv_{1}, hp_{hp}, mp_{mp} {
   }
+  Character(const Character& c)
+      : name_{c.name_},
+        job_{c.job_},
+        age_{c.age_},
+        lv_{c.lv_},
+        hp_{c.hp_},
+        mp_{c.mp_} {
+  }
   ~Character() = default;
 
   void SetName(const std::string& name) {
