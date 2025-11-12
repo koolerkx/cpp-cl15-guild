@@ -18,6 +18,7 @@ class Guild {
   // Guild(const std::string& filename)
   ~Guild();
   int AddMember(Character* adventurer);
+  Character* GetMember(int index);
   void RemoveMember(int index);
   void DisplayList() const;
   void DisplayDetailed(int index) const;

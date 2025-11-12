@@ -24,6 +24,9 @@ int Guild::AddMember(Character* adventurer) {
   delete adventurer;
   return -1;  // todo: implement exception
 }
+Character* Guild::GetMember(int index) {
+  return m_adventurers[index];
+}
 
 void Guild::RemoveMember(int index) {
   delete m_adventurers[index];

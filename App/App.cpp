@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "Command/AddMemberCommand.h"
+#include "Command/RemoveMemberCommand.h"
 #include "CommandHistory.h"
 #include "Menu.h"
 
@@ -25,7 +26,6 @@ void App::Run() {
     MenuOption selected_option = static_cast<MenuOption>(Ask<char>());
 
     int input;
-    char yes_no;
 
     switch (selected_option) {
       case MenuOption::QUIT:
@@ -34,16 +34,7 @@ void App::Run() {
         command_history_->Execute(new AddMemberCommand(guild_));
         break;
       case MenuOption::REMOVE_MEMBER:
-        input = Ask<int>("リストの何番目の冒険者を退会致しますか？");
-        std::cout << "\n";
-        std::cout << "\n";
-        std::cout << "\n";
-        guild_->DisplayDetailed(input);
-
-        yes_no = Ask<char>("この冒険者も退会させますか？ y/n");
-        if (yes_no == 'y') {
-          guild_->RemoveMember(input);
-        }
+        command_history_->Execute(new RemoveMemberCommand(guild_));
         break;
       case MenuOption::DISPLAY_LIST:
         guild_->DisplayList();
