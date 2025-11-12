@@ -1,10 +1,18 @@
 ﻿#pragma once
 
+#include <cstdint>
+
 class ICommand {
  public:
+  enum class Result: uint8_t {
+    SUCCESS,
+    CANCELED,
+    FAILED
+  };
+  
   virtual ~ICommand() = default;
-  virtual void Execute() = 0;
+  virtual Result Execute() = 0;
 
-  virtual void Redo() = 0;
-  virtual void Undo() = 0;
+  virtual Result Redo() = 0;
+  virtual Result Undo() = 0;
 };

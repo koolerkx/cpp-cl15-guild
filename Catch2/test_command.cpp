@@ -14,22 +14,24 @@ class ValueCommand : public ICommand {
       : value_(value), new_value_(new_value), old_value_(value), log_(log) {
   }
 
-  void Execute() override {
+  Result Execute() override {
     if (log_)
       log_->push_back("Execute: " + std::to_string(old_value_) + "->" +
                       std::to_string(new_value_));
     value_ = new_value_;
+    return Result::SUCCESS;
   }
 
-  void Redo() override {
-    this->Execute();
+  Result Redo() override {
+    return this->Execute();
   }
 
-  void Undo() override {
+  Result Undo() override {
     if (log_)
       log_->push_back("Undo: " + std::to_string(new_value_) + "->" +
                       std::to_string(old_value_));
     value_ = old_value_;
+    return Result::SUCCESS;
   }
 
  private:

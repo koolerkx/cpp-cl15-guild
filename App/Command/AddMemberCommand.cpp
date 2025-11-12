@@ -8,7 +8,7 @@ AddMemberCommand::~AddMemberCommand() {
   delete character_;
 }
 
-void AddMemberCommand::Execute() {
+ICommand::Result AddMemberCommand::Execute() {
   std::string name = App::Ask<std::string>("入会の名前を入力してください。\n");
   std::string job_name =
     App::Ask<std::string>("入会の職業を入力してください。\n");
@@ -18,8 +18,6 @@ void AddMemberCommand::Execute() {
   int hp = App::Ask<int>("入会のHPを入力してください。\n");
   int mp = App::Ask<int>("入会のMPを入力してください。\n");
 
-  std::cout << "\n";
-  std::cout << "\n";
   std::cout << "\n";
 
   std::cout << "名前" << name << "\n";
@@ -31,21 +29,34 @@ void AddMemberCommand::Execute() {
 
   char is_confirm =
     App ::Ask<char>("この冒険者を登録致します。よろしいですが？ y/n\n");
-  if (is_confirm == 'y') {
-    character_ = new Character{name, job_name, age, hp, mp};
-    inserted_id_ = guild_->AddMember(new Character(*character_));
-  } else {
+  if (is_confirm != 'y') {
     std::cout << "登録をキャンセルしました。\n";
+    return Result::CANCELED;
   }
-}
 
-void AddMemberCommand::Redo() {
+  character_ = new Character{name, job_name, age, hp, mp};
   inserted_id_ = guild_->AddMember(new Character(*character_));
+
+  return Result::SUCCESS;
 }
 
-void AddMemberCommand::Undo() {
-  if (inserted_id_ != -1) {
-    guild_->RemoveMember(inserted_id_);
-    inserted_id_ = -1;
+ICommand::Result AddMemberCommand::Redo() {
+  if (character_ == nullptr) {
+    throw exception::InvalidCommandStateException(
+      "[invariant] character_ が nullptr のため処理を実行できません");
   }
+
+  inserted_id_ = guild_->AddMember(new Character(*character_));
+  return Result::SUCCESS;
+}
+
+ICommand::Result AddMemberCommand::Undo() {
+  if (inserted_id_ == -1)
+    throw exception::InvalidCommandStateException(
+      "[invariant] inserted_id_ が無効なため処理を実行できません");
+  ;
+
+  guild_->RemoveMember(inserted_id_);
+  inserted_id_ = -1;
+  return Result::SUCCESS;
 }

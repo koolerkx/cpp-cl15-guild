@@ -15,7 +15,7 @@ class RemoveMemberCommand : public ICommand {
   }
 
   ~RemoveMemberCommand() override;
-  void Execute() override;
-  void Redo() override;
-  void Undo() override;
+  Result Execute() override;
+  Result Redo() override;
+  Result Undo() override;
 };

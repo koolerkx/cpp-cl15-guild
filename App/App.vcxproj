@@ -173,6 +173,7 @@
         <ClInclude Include="Guild.h"/>
         <ClInclude Include="Job.h"/>
         <ClInclude Include="Menu.h"/>
+        <ClInclude Include="Exception.h"/>
     </ItemGroup>
     <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
     <ImportGroup Label="ExtensionTargets">

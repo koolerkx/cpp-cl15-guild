@@ -15,7 +15,7 @@ class AddMemberCommand : public ICommand {
   }
 
   ~AddMemberCommand() override;
-  void Execute() override;
-  void Redo() override;
-  void Undo() override;
+  Result Execute() override;
+  Result Redo() override;
+  Result Undo() override;
 };

@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include "CommandHistory.h"
+#include "Exception.h"
 #include "Guild.h"
 
 enum class MenuOption : char {
@@ -33,7 +34,7 @@ class App {
     std::istringstream iss(raw_input);
     T result{};
     if (!(iss >> result)) {
-      throw std::invalid_argument("Invalid input type");
+      throw exception::InvalidInputException();
     }
 
     return result;

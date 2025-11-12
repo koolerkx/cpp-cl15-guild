@@ -9,80 +9,65 @@ CommandHistory::~CommandHistory() {
 }
 
 void CommandHistory::Execute(ICommand* cmd) {
-  if (!cmd) return;
+  if (cmd == nullptr) {
+    throw std::invalid_argument(
+      "コマンドExecute関数はnullptrで、実行できません");
+  }
 
-  // Execute the command
-  cmd->Execute();
+  ICommand::Result result = cmd->Execute();
+  if (result != ICommand::Result::SUCCESS) {
+    return;
+  }
 
-  // Move to next position in circular array
   int next_pos = (current_ + 1) % HISTORY_SIZE;
-
-  // Delete the command that will be overwritten (if any)
   delete command_history_[next_pos];
   command_history_[next_pos] = nullptr;
 
-  // If history is full, move start forward
   if (count_ == HISTORY_SIZE) {
     start_ = (start_ + 1) % HISTORY_SIZE;
   } else {
     count_++;
   }
 
-  // Store the new command
   command_history_[next_pos] = cmd;
   current_ = next_pos;
   end_ = current_;
 
-  // Initialize start_ on first command
   if (count_ == 1) {
     start_ = 0;
   }
 }
 
 void CommandHistory::Undo() {
-  // Check if there's anything to undo
-  if (count_ == 0 || current_ == -1) {
-    std::cout << "UNDO 何もありません" << "\n";
+  if (count_ == 0) {
+    std::cout << "取り消し履歴がないため、取り消しを実行できません。" << "\n";
     return;
-  };
-
-  // Undo the current command
-  command_history_[current_]->Undo();
-
-  // Check if we're at the start (can't undo further)
-  if (current_ == start_) {
-    current_ = -1;  // Mark as "before first command"
-    std::cout << "UNDO 最初のコマンドを元に戻しました" << "\n";
+  }
+  if (current_ == -1) {
+    std::cout << "これ以上過去の操作を取り消すことはできません。" << "\n";
     return;
   }
 
-  // Move current back
-  current_ = (current_ - 1 + HISTORY_SIZE) % HISTORY_SIZE;
+  command_history_[current_]->Undo();
+  std::cout << "コマンドの取り消しを実行しました。" << "\n";
 
-  std::cout << "UNDO 元に戻しました" << "\n";
+  current_ =
+    current_ == start_ ? -1 : (current_ - 1 + HISTORY_SIZE) % HISTORY_SIZE;
 }
 
 void CommandHistory::Redo() {
-  // Check if there's anything to redo
   if (count_ == 0) {
-    std::cout << "REDO 何もありません" << "\n";
+    std::cout << "やり直し履歴がないため、やり直しを実行できません。" << "\n";
     return;
-  };
-
-  // If current_ == end_, we're at the latest command already
-  if (current_ == end_) {
-    std::cout << "REDO 最後のコマンドをやり直しました" << "\n";
-    return;
-  };
-
-  // Move current forward (or from -1 to start)
-  if (current_ == -1) {
-    current_ = start_;
-  } else {
-    current_ = (current_ + 1) % HISTORY_SIZE;
   }
 
-  // Redo the command
+  if (current_ == end_) {
+    std::cout << "これ以上先の操作をやり直すことはできません。" << "\n";
+    return;
+  }
+
+  current_ = current_ == -1 ? start_ : (current_ + 1) % HISTORY_SIZE;
+
   command_history_[current_]->Redo();
-  std::cout << "REDO やり直しました" << "\n";
+  std::cout << "コマンドのやり直しを実行しました。" << "\n";
 }
