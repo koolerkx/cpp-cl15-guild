@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "App", "App\App.vcxproj", "{4D6D68EF-FBB3-4C76-9179-7761E6203F52}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Catch2", "Catch2\Catch2.vcxproj", "{D9DE1A6B-2EB1-42DF-82B7-5292D037D274}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -18,5 +20,13 @@ Global
 		{4D6D68EF-FBB3-4C76-9179-7761E6203F52}.Release|Win32.Build.0 = Release|Win32
 		{4D6D68EF-FBB3-4C76-9179-7761E6203F52}.Release|x64.ActiveCfg = Release|x64
 		{4D6D68EF-FBB3-4C76-9179-7761E6203F52}.Release|x64.Build.0 = Release|x64
+		{D9DE1A6B-2EB1-42DF-82B7-5292D037D274}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D9DE1A6B-2EB1-42DF-82B7-5292D037D274}.Debug|Win32.Build.0 = Debug|Win32
+		{D9DE1A6B-2EB1-42DF-82B7-5292D037D274}.Debug|x64.ActiveCfg = Debug|x64
+		{D9DE1A6B-2EB1-42DF-82B7-5292D037D274}.Debug|x64.Build.0 = Debug|x64
+		{D9DE1A6B-2EB1-42DF-82B7-5292D037D274}.Release|Win32.ActiveCfg = Release|Win32
+		{D9DE1A6B-2EB1-42DF-82B7-5292D037D274}.Release|Win32.Build.0 = Release|Win32
+		{D9DE1A6B-2EB1-42DF-82B7-5292D037D274}.Release|x64.ActiveCfg = Release|x64
+		{D9DE1A6B-2EB1-42DF-82B7-5292D037D274}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 EndGlobal
