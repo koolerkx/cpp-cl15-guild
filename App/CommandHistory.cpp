@@ -116,13 +116,13 @@ void CommandHistory::DisplayHistory() const {
     std::cout << "履歴がありません。" << "\n";
   } else {
     for (int i = 0; i < count_; i++) {
-      if (current_ == -1) break;
+      // if (current_ == -1) continue;
 
-      const int pos = start_ + i;
+      const int pos = (start_ + i) % HISTORY_SIZE;
       std::cout << " " << i + 1 << " " << command_history_[pos]->GetName();
 
       if (pos == current_) {
-        std::cout << " <- いまここ" << "\n";
+        std::cout << " <- いまここまで実行した" << "\n";
         break;
       }
       std::cout << "\n";
