@@ -17,6 +17,7 @@ class RemoveMemberCommand : public ICommand {
       : guild_(guild),
         character_(new Character(save_data.character_)),
         inserted_id_(save_data.inserted_id_) {
+    this->SetName(save_data.name_);
   }
 
   ~RemoveMemberCommand() override;

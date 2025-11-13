@@ -43,7 +43,7 @@ ICommand::Result RemoveMemberCommand::Redo() {
 }
 
 ICommand::Result RemoveMemberCommand::Undo() {
-  if (inserted_id_ == -1) {
+  if (character_ == nullptr) {
     throw exception::InvalidCommandStateException(
       "Trying to undo remove member, but inserted id is null.");
   }
