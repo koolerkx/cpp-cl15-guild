@@ -10,6 +10,16 @@
 
 #include "job.h"
 
+struct CharacterSaveData {
+  bool is_valid_{false};
+  int age_{0};
+  int lv_{1};
+  int hp_{0};
+  int mp_{0};
+  int job_id_{0};
+  char name_[256]{"–¼‘O‚È‚µ"};
+};
+
 class Character {
  private:
   std::string name_{"–¼‘O‚È‚µ"};
@@ -37,6 +47,28 @@ class Character {
         hp_{c.hp_},
         mp_{c.mp_} {
   }
+  Character(const CharacterSaveData& save_data)
+      : name_{save_data.name_},
+        job_{save_data.job_id_},
+        age_{save_data.age_},
+        lv_{save_data.lv_},
+        hp_{save_data.hp_},
+        mp_{save_data.mp_} {
+  }
+
+  CharacterSaveData GetSaveData() const {
+    CharacterSaveData c;
+    c.is_valid_ = true;
+    c.age_ = age_;
+    c.lv_ = lv_;
+    c.hp_ = hp_;
+    c.mp_ = mp_;
+    c.job_id_ = job_.GetId();
+    strncpy_s(c.name_, name_.c_str(), sizeof(c.name_));
+
+    return c;
+  }
+
   ~Character() = default;
 
   void SetName(const std::string& name) {

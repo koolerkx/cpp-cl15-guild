@@ -2,10 +2,47 @@
 
 #include <iostream>
 
+#include "Command/AddMemberCommand.h"
+#include "Command/RemoveMemberCommand.h"
+
+CommandHistory::CommandHistory(Guild* guild,
+                               const CommandHistoryInitProps& save_data) {
+  for (int i = 0; i < HISTORY_SIZE; i++) {
+    switch (save_data.commands->command_type) {
+      case CommandType::AddMemberCommand:
+        command_history_[i] =
+          new AddMemberCommand(guild, save_data.commands[i]);
+        break;
+      case CommandType::RemoveMemberCommand:
+        command_history_[i] =
+          new RemoveMemberCommand(guild, save_data.commands[i]);
+        break;
+    }
+  }
+
+  count_ = save_data.count_;
+  start_ = save_data.start_;
+  end_ = save_data.end_;
+  current_ = save_data.current_;
+}
+
 CommandHistory::~CommandHistory() {
   for (int i = 0; i < HISTORY_SIZE; i++) {
     delete command_history_[i];
   }
+}
+
+void CommandHistory::GetSaveData(CommandHistoryInitProps* buffer) const {
+  if (count_ > 0) {
+    for (int i = 0; i < count_; i++) {
+      const int pos = start_ + i;
+      buffer->commands[i] = command_history_[pos]->GetSaveData();
+    }
+  }
+  buffer->start_ = start_;
+  buffer->end_ = end_;
+  buffer->current_ = current_;
+  buffer->count_ = count_;
 }
 
 void CommandHistory::Execute(ICommand* cmd) {
@@ -79,14 +116,15 @@ void CommandHistory::DisplayHistory() const {
     std::cout << "履歴がありません。" << "\n";
   } else {
     for (int i = 0; i < count_; i++) {
-      const int pos = start_ + i;
+      if (current_ == -1) break;
 
+      const int pos = start_ + i;
       std::cout << " " << i + 1 << " " << command_history_[pos]->GetName();
 
       if (pos == current_) {
         std::cout << " <- いまここ" << "\n";
         break;
-      };
+      }
       std::cout << "\n";
     }
   }

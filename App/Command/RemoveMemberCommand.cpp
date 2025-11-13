@@ -51,3 +51,13 @@ ICommand::Result RemoveMemberCommand::Undo() {
   inserted_id_ = guild_->AddMember(new Character(*character_));
   return Result::SUCCESS;
 }
+
+CommandSaveData RemoveMemberCommand::GetSaveData() {
+  CommandSaveData data;
+  data.command_type = CommandType::RemoveMemberCommand;
+  data.character_ = character_->GetSaveData();
+  strncpy_s(data.name_, name_.c_str(), sizeof(data.name_));
+  data.inserted_id_ = inserted_id_;
+
+  return data;
+}

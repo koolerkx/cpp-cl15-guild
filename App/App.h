@@ -4,7 +4,15 @@
 
 #include "CommandHistory.h"
 #include "Exception.h"
+#include "File.h"
 #include "Guild.h"
+
+const std::string SAVE_FILE_PATH = "save.dat";
+
+struct SaveData {
+  GuildInitProps characters{};
+  CommandHistoryInitProps command_history_[HISTORY_SIZE]{};
+};
 
 enum class MenuOption : char {
   QUIT = '0',
@@ -42,6 +50,12 @@ class App {
   }
 
  private:
-  Guild* guild_;
-  CommandHistory* command_history_;
+  Guild* guild_{nullptr};
+  CommandHistory* command_history_{nullptr};
+
+  File<SaveData>* file_{nullptr};
+
+  void Save() const;
+  using LoadDataReturn = std::tuple<bool, SaveData>;
+  LoadDataReturn Load() const;
 };

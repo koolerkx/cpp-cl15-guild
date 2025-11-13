@@ -2,20 +2,37 @@
 
 #include <iostream>
 #include <sstream>
+#include <tuple>
 
 #include "Command/AddMemberCommand.h"
 #include "Command/RemoveMemberCommand.h"
 #include "CommandHistory.h"
+#include "File.h"
 #include "Menu.h"
 
 App::App() {
-  guild_ = new Guild();
-  command_history_ = new CommandHistory();
+  file_ = new File<SaveData>(SAVE_FILE_PATH);
+
+  LoadDataReturn loaded_data = Load();
+  bool load_result;
+  SaveData save_data;
+
+  std::tie(load_result, save_data) = loaded_data;
+
+  if (load_result) {
+    std::cout << "保存データを読み込みました。\n";
+    guild_ = new Guild(save_data.characters);
+    command_history_ = new CommandHistory(guild_, *save_data.command_history_);
+  } else {
+    guild_ = new Guild();
+    command_history_ = new CommandHistory();
+  }
 }
 
 App::~App() {
   delete guild_;
   delete command_history_;
+  delete file_;
 }
 
 void App::Run() {
@@ -31,7 +48,7 @@ void App::Run() {
 
       switch (selected_option) {
         case MenuOption::QUIT:
-          return;
+          break;
         case MenuOption::ADD_MEMBER:
           command_history_->Execute(new AddMemberCommand(guild_));
           break;
@@ -55,6 +72,10 @@ void App::Run() {
           command_history_->DisplayHistory();
           break;
       }
+
+      if (selected_option == MenuOption::QUIT) {
+        break;
+      }
     } catch (const exception::InvalidCommandStateException& e) {
       // コマンド履歴をリセットする
       std::cerr << "[App エラー] " << e.what() << "\n";
@@ -68,4 +89,31 @@ void App::Run() {
       std::cerr << "予期せぬエラーが発生しました。\n";
     }
   } while (true);
+
+  Save();
+  std::cout << "データが保存されました。" << "\n";
+  std::cin.get();
+}
+
+void App::Save() const {
+  try {
+    SaveData save_data;
+    guild_->GetSaveData(&save_data.characters);
+    command_history_->GetSaveData(save_data.command_history_);
+
+    file_->Save(save_data);
+  } catch (const exception::FileInputFailedException& e) {
+    std::cout << e.what() << "\n";
+  }
+}
+
+App::LoadDataReturn App::Load() const {
+  try {
+    SaveData save_data = file_->Load();
+    return std::make_tuple(true, save_data);
+  } catch (const exception::FileInputFailedException& e) {
+    std::cout << e.what() << "\n";
+
+    return std::make_tuple(false, SaveData{});
+  }
 }

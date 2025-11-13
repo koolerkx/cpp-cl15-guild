@@ -3,6 +3,20 @@
 #include <cstdint>
 #include <string>
 
+#include "../Character.h"
+
+enum class CommandType: uint8_t {
+  AddMemberCommand,
+  RemoveMemberCommand,
+};
+
+struct CommandSaveData {
+  CommandType command_type;
+  CharacterSaveData character_;
+  int inserted_id_{-1};
+  char name_[256]{""};
+};
+
 class ICommand {
  public:
   enum class Result : uint8_t { SUCCESS, CANCELED, FAILED };
@@ -16,6 +30,7 @@ class ICommand {
 
   virtual Result Redo() = 0;
   virtual Result Undo() = 0;
+  virtual CommandSaveData GetSaveData() = 0;
 
   const std::string& GetName() {
     return name_;

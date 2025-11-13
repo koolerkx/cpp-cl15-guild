@@ -15,9 +15,17 @@ class AddMemberCommand : public ICommand {
  public:
   AddMemberCommand(Guild* guild) : guild_(guild) {
   }
+  AddMemberCommand(Guild* guild, const CommandSaveData& save_data)
+      : guild_(guild),
+        character_(new Character(save_data.character_)),
+        inserted_id_(save_data.inserted_id_)
+  {
+    this->SetName(save_data.name_);
+  }
 
   ~AddMemberCommand() override;
   Result Execute() override;
   Result Redo() override;
   Result Undo() override;
+  CommandSaveData GetSaveData() override;
 };

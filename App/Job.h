@@ -23,6 +23,9 @@ class Job {
   const std::string& GetName() const {
     return m_names[m_id];
   }
+  int GetId() const {
+    return m_id;
+  }
 };
 
 #endif  // JOB_H

@@ -57,9 +57,18 @@ ICommand::Result AddMemberCommand::Undo() {
   if (inserted_id_ == -1)
     throw exception::InvalidCommandStateException(
       "[invariant] inserted_id_ が無効なため処理を実行できません");
-  ;
 
   guild_->RemoveMember(inserted_id_);
   inserted_id_ = -1;
   return Result::SUCCESS;
+}
+
+CommandSaveData AddMemberCommand::GetSaveData() {
+  CommandSaveData data;
+  data.command_type = CommandType::AddMemberCommand;
+  data.character_ = character_->GetSaveData();
+  strncpy_s(data.name_, name_.c_str(), sizeof(data.name_));
+  data.inserted_id_ = inserted_id_;
+
+  return data;
 }

@@ -7,6 +7,14 @@
 
 #include <iostream>
 
+Guild::Guild(GuildInitProps save_data) {
+  for (int i = 0; i < MAX_ADVENTURERS; i++) {
+    if (!save_data[i].is_valid_) continue;
+    Character* c = new Character(save_data[i]);
+    AddMember(c);
+  }
+}
+
 Guild::~Guild() {
   for (Character* p : m_adventurers) {
     delete p;
@@ -24,6 +32,7 @@ int Guild::AddMember(Character* adventurer) {
   delete adventurer;
   return -1;  // todo: implement exception
 }
+
 Character* Guild::GetMember(int index) {
   return m_adventurers[index];
 }
@@ -58,4 +67,11 @@ void Guild::DisplayDetailed(int index) const {
   std::cout << "HP: " << p->GetHp() << "\n";
   std::cout << "MP: " << p->GetMp() << "\n";
   std::cout << "----------------------" << "\n";
+}
+
+void Guild::GetSaveData(GuildInitProps* buffer) const {
+  for (int i = 0; i < MAX_ADVENTURERS; i++) {
+    if (m_adventurers[i] == nullptr) continue;
+    (*buffer)[i] = m_adventurers[i]->GetSaveData();
+  }
 }
