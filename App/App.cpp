@@ -44,8 +44,6 @@ void App::Run() {
       MenuOption selected_option = static_cast<MenuOption>(Ask<char>());
       std::cout << "\n";
 
-      int input;
-
       switch (selected_option) {
         case MenuOption::QUIT:
           break;
@@ -58,10 +56,10 @@ void App::Run() {
         case MenuOption::DISPLAY_LIST:
           guild_->DisplayList();
           break;
-        case MenuOption::DISPLAY_DETAIL:
-          input = Ask<int>("名簿を検索しますか？");
-          guild_->DisplayDetailed(input);
+        case MenuOption::DISPLAY_DETAIL: {
+          guild_->DisplayDetailed(Ask<int>("名簿を検索しますか？"));
           break;
+        }
         case MenuOption::UNDO:
           command_history_->Undo();
           break;

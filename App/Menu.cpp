@@ -17,6 +17,6 @@ void Menu::ShowMainMenu() {
   std::cout << " 4 : 会員詳細\n";
   std::cout << " - : Undo 元に戻す\n";
   std::cout << " + : Redo やり直し\n";
-  std::cout << " = : Redo やり直し\n";
+  std::cout << " = : 操作履歴\n";
   std::cout << " 0 : 終了\n";
 }
