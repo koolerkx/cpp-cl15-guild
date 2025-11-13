@@ -4,6 +4,8 @@
 
 #include "../App.h"
 
+const std::string REMOVE_MEMBER_COMMAND_NAME = "ƒMƒ‹ƒhƒƒ“ƒo‘Þ‰ï";
+
 RemoveMemberCommand::~RemoveMemberCommand() {
   delete character_;
 }
@@ -26,6 +28,7 @@ ICommand::Result RemoveMemberCommand::Execute() {
   inserted_id_ = input;
   guild_->RemoveMember(input);
 
+  SetName(REMOVE_MEMBER_COMMAND_NAME + " " + character_->GetName());
   return Result::SUCCESS;
 }
 

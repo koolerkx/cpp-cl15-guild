@@ -71,3 +71,27 @@ void CommandHistory::Redo() {
   command_history_[current_]->Redo();
   std::cout << "コマンドのやり直しを実行しました。" << "\n";
 }
+
+void CommandHistory::DisplayHistory() const {
+  std::cout << "==== 操作履歴 ====" << "\n";
+
+  if (count_ <= 0) {
+    std::cout << "履歴がありません。" << "\n";
+  } else {
+    for (int i = 0; i < count_; i++) {
+      const int pos = start_ + i;
+
+      std::cout << " " << i + 1 << " " << command_history_[pos]->GetName();
+
+      if (pos == current_) {
+        std::cout << " <- いまここ" << "\n";
+        break;
+      };
+      std::cout << "\n";
+    }
+  }
+
+  std::cout << "=================" << "\n";
+  std::cout << "保存上限: " << HISTORY_SIZE << "\n";
+  std::cout << "=================" << "\n";
+}

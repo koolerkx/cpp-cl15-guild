@@ -9,6 +9,8 @@ class CommandHistory {
   void Undo();
   void Redo();
 
+  void DisplayHistory() const;
+
   CommandHistory() = default;
   ~CommandHistory();
 

@@ -14,6 +14,7 @@ enum class MenuOption : char {
   DISPLAY_DETAIL = '4',
   REDO = '+',
   UNDO = '-',
+  HISTORY = '=',
 };
 
 class App {

@@ -51,6 +51,9 @@ void App::Run() {
         case MenuOption::REDO:
           command_history_->Redo();
           break;
+        case MenuOption::HISTORY:
+          command_history_->DisplayHistory();
+          break;
       }
     } catch (const exception::InvalidCommandStateException& e) {
       // コマンド履歴をリセットする

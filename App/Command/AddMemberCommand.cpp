@@ -4,6 +4,8 @@
 
 #include "../App.h"
 
+const std::string ADD_MEMBER_COMMAND_NAME = "ギルドメンバー追加";
+
 AddMemberCommand::~AddMemberCommand() {
   delete character_;
 }
@@ -37,6 +39,7 @@ ICommand::Result AddMemberCommand::Execute() {
   character_ = new Character{name, job_name, age, hp, mp};
   inserted_id_ = guild_->AddMember(new Character(*character_));
 
+  SetName(ADD_MEMBER_COMMAND_NAME + " " + character_->GetName());
   return Result::SUCCESS;
 }
 
