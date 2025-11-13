@@ -34,9 +34,9 @@ CommandHistory::~CommandHistory() {
 
 void CommandHistory::GetSaveData(CommandHistoryInitProps* buffer) const {
   if (count_ > 0) {
-    for (int i = 0; i < count_; i++) {
-      const int pos = start_ + i;
-      buffer->commands[i] = command_history_[pos]->GetSaveData();
+    for (int i = 0; i < HISTORY_SIZE; i++) {
+      if (command_history_[i] == nullptr) continue;
+      buffer->commands[i] = command_history_[i]->GetSaveData();
     }
   }
   buffer->start_ = start_;
