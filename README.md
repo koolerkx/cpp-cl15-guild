@@ -1,5 +1,7 @@
 ## 新たに追加した事項
 
+- メイン処理をラッパークラス
+    - `App.h`
 - メンバー追加・退会の取り消し（コマンドパターン）
     - `CommandHistory.h`
     - `ICommand.h`, `AddMemberCommand`, `RemoveMemberCommand`
