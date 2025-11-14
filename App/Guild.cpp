@@ -30,7 +30,7 @@ int Guild::AddMember(Character* adventurer) {
   }
 
   delete adventurer;
-  return -1;  // todo: implement exception
+  return -1;
 }
 
 Character* Guild::GetMember(int index) {
