@@ -19,7 +19,7 @@ class Guild {
  public:
   Guild() = default;
   Guild(GuildInitProps save_data);
-  
+
   ~Guild();
   int AddMember(Character* adventurer);
   Character* GetMember(int index);

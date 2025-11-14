@@ -1,4 +1,8 @@
-﻿#include "AddMemberCommand.h"
+﻿/**
+ * @file AddMemberCommand.cpp
+ * @brief ギルドにメンバーを追加するコマンド
+ */
+#include "AddMemberCommand.h"
 
 #include <iostream>
 

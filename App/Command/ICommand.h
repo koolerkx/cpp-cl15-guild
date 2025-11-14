@@ -1,11 +1,15 @@
-﻿#pragma once
+﻿/**
+ * @file ICommand.h
+ * @brief コマンドの基底クラス
+ */
+#pragma once
 
 #include <cstdint>
 #include <string>
 
 #include "../Character.h"
 
-enum class CommandType: uint8_t {
+enum class CommandType : uint8_t {
   AddMemberCommand,
   RemoveMemberCommand,
 };
@@ -19,6 +23,7 @@ struct CommandSaveData {
 
 class ICommand {
  public:
+  /// @brief コマンドの実行結果
   enum class Result : uint8_t { SUCCESS, CANCELED, FAILED };
 
   ICommand() = default;

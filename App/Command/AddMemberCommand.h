@@ -1,4 +1,8 @@
-﻿#pragma once
+﻿/**
+ * @file AddMemberCommand.h
+ * @brief ギルドにメンバーを追加するコマンド
+ */
+#pragma once
 #include <string>
 
 #include "../Guild.h"
@@ -18,8 +22,7 @@ class AddMemberCommand : public ICommand {
   AddMemberCommand(Guild* guild, const CommandSaveData& save_data)
       : guild_(guild),
         character_(new Character(save_data.character_)),
-        inserted_id_(save_data.inserted_id_)
-  {
+        inserted_id_(save_data.inserted_id_) {
     this->SetName(save_data.name_);
   }
 

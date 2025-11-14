@@ -1,10 +1,13 @@
-﻿#pragma once
+﻿/**
+ * @file CommandHistory.h
+ * @brief 操作履歴の管理
+ */
+#pragma once
 #include "Command/ICommand.h"
 #include "Guild.h"
 
 static constexpr int HISTORY_SIZE = 5;
 
-// using CommandHistoryInitProps = CommandSaveData[HISTORY_SIZE];
 struct CommandHistoryInitProps {
   int count_{0};
   int start_{0};
@@ -13,6 +16,10 @@ struct CommandHistoryInitProps {
   CommandSaveData commands[HISTORY_SIZE];
 };
 
+/**
+ * @class CommandHistory
+ * @brief 操作履歴の管理
+ */
 class CommandHistory {
  public:
   void Execute(ICommand* cmd);

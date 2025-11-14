@@ -1,4 +1,8 @@
-﻿#pragma once
+﻿/**
+ * @file App.h
+ * @brief アプリケーションのループ
+ */
+#pragma once
 #include <iostream>
 #include <sstream>
 
@@ -9,6 +13,11 @@
 
 const std::string SAVE_FILE_PATH = "save.dat";
 
+/**
+ * @struct SaveData
+ * @brief セーブデータの構造体
+ * @attention 内容を変えたら、必ず新しいセーブデータを作る
+ */
 struct SaveData {
   GuildInitProps characters{};
   CommandHistoryInitProps command_history_[HISTORY_SIZE]{};
@@ -56,6 +65,7 @@ class App {
   File<SaveData>* file_{nullptr};
 
   void Save() const;
+
   using LoadDataReturn = std::tuple<bool, SaveData>;
   LoadDataReturn Load() const;
 };

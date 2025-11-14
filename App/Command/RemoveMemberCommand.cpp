@@ -1,3 +1,8 @@
+/**
+ * @file RemoveMemberCommand.cpp
+ * @brief ギルドのメンバーを退会させるコマンド
+ */
+
 #include "RemoveMemberCommand.h"
 
 #include <iostream>

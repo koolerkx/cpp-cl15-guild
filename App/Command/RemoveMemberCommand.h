@@ -1,3 +1,7 @@
+/**
+ * @file RemoveMemberCommand.h
+ * @brief ギルドのメンバーを退会させるコマンド
+ */
 #pragma once
 #include "../Guild.h"
 #include "ICommand.h"

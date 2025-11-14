@@ -1,4 +1,8 @@
-﻿#include "Menu.h"
+﻿/**
+ * @file Menu.cpp
+ * @brief メニューの表示
+ */
+#include "Menu.h"
 
 #include <iostream>
 

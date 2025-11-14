@@ -1,4 +1,8 @@
-﻿#include "App.h"
+﻿/**
+ * @file App.cpp
+ * @brief アプリケーションのループ
+ */
+#include "App.h"
 
 #include <iostream>
 #include <sstream>

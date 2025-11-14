@@ -1,8 +1,17 @@
+/**
+ * @file Exception.h
+ * @brief 例外処理
+ */
+
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
 
 #include <exception>
 
+/**
+ * @namespace exception
+ * @brief 例外処理
+ */
 namespace exception {
 // 基底クラス
 class Exception : public std::exception {

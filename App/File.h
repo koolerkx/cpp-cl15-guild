@@ -1,3 +1,8 @@
+/**
+ * @file file.h
+ * @brief ファイルの入出力
+ */
+
 #pragma once
 
 #include <fstream>
@@ -5,6 +10,13 @@
 
 #include "Exception.h"
 
+/**
+ * @class File
+ * @brief １つのファイルを表すクラス、そのファイルを入出力することが可能です
+ * @tparam SaveDataT データの構造体
+ * @attention
+ * データの構造体は直接入出力するため、ポインターなど必ず入れないでください
+ */
 template <typename SaveDataT>
 class File {
  public:
@@ -17,7 +29,7 @@ class File {
     if (!ofs.is_open()) {
       throw exception::FileOutputFailedException();
     }
-    
+
     ofs.write(reinterpret_cast<const char*>(&save_data), sizeof(SaveDataT));
     ofs.close();
   }
@@ -27,7 +39,7 @@ class File {
     if (!ifs.is_open()) {
       throw exception::FileInputFailedException();
     }
-    
+
     SaveDataT save_data{};
     ifs.read(reinterpret_cast<char*>(&save_data), sizeof(SaveDataT));
     ifs.close();

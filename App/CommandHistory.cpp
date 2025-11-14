@@ -1,4 +1,8 @@
-﻿#include "CommandHistory.h"
+﻿/**
+ * @file CommandHistory.cpp
+ * @brief 操作履歴の管理
+ */
+#include "CommandHistory.h"
 
 #include <iostream>
 
