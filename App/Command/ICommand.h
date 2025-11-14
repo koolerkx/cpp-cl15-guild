@@ -10,8 +10,9 @@
 #include "../Character.h"
 
 enum class CommandType : uint8_t {
-  AddMemberCommand,
-  RemoveMemberCommand,
+  NoCommand = '0',
+  AddMemberCommand = '1',
+  RemoveMemberCommand = '2',
 };
 
 struct CommandSaveData {

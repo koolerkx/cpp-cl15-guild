@@ -12,7 +12,7 @@
 CommandHistory::CommandHistory(Guild* guild,
                                const CommandHistoryInitProps& save_data) {
   for (int i = 0; i < HISTORY_SIZE; i++) {
-    switch (save_data.commands->command_type) {
+    switch (save_data.commands[i].command_type) {
       case CommandType::AddMemberCommand:
         command_history_[i] =
           new AddMemberCommand(guild, save_data.commands[i]);
@@ -21,6 +21,8 @@ CommandHistory::CommandHistory(Guild* guild,
         command_history_[i] =
           new RemoveMemberCommand(guild, save_data.commands[i]);
         break;
+      default:
+        command_history_[i] = nullptr;
     }
   }
 
@@ -39,8 +41,11 @@ CommandHistory::~CommandHistory() {
 void CommandHistory::GetSaveData(CommandHistoryInitProps* buffer) const {
   if (count_ > 0) {
     for (int i = 0; i < HISTORY_SIZE; i++) {
-      if (command_history_[i] == nullptr) continue;
-      buffer->commands[i] = command_history_[i]->GetSaveData();
+      if (command_history_[i] == nullptr) {
+        buffer->commands[i] = CommandSaveData{CommandType::NoCommand};
+      } else {
+        buffer->commands[i] = command_history_[i]->GetSaveData();
+      }
     }
   }
   buffer->start_ = start_;
